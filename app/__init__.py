@@ -1,0 +1,1 @@
+"""Tech Companion application package."""

@@ -1,0 +1,50 @@
+{"text":"The letters shrank and I cannot make them out.","label":"increase_text_size"}
+{"text":"Please make the words less fiddly to read.","label":"increase_text_size"}
+{"text":"Everything on here looks much smaller today.","label":"increase_text_size"}
+{"text":"I need bigger writing on this screen.","label":"increase_text_size"}
+{"text":"My eyes cannot cope with these little words.","label":"increase_text_size"}
+{"text":"The curved internet picture has an exclamation mark.","label":"wifi_help"}
+{"text":"Pages say there is no connection.","label":"wifi_help"}
+{"text":"This phone stopped getting the internet at home.","label":"wifi_help"}
+{"text":"Why does it say offline?","label":"wifi_help"}
+{"text":"The web will not load on my phone.","label":"wifi_help"}
+{"text":"My hearing things are not paired anymore.","label":"bluetooth_help"}
+{"text":"The phone cannot see my little speaker.","label":"bluetooth_help"}
+{"text":"I want sound through these wireless headphones.","label":"bluetooth_help"}
+{"text":"It keeps forgetting my earbuds.","label":"bluetooth_help"}
+{"text":"How do I join this phone to the car?","label":"bluetooth_help"}
+{"text":"Calls are whisper quiet.","label":"volume_help"}
+{"text":"I miss every ring even with the phone beside me.","label":"volume_help"}
+{"text":"The sound buttons do not make it loud enough.","label":"volume_help"}
+{"text":"I need this to ring louder.","label":"volume_help"}
+{"text":"Videos have sound but calls do not.","label":"volume_help"}
+{"text":"These banners keep covering what I am reading.","label":"notification_help"}
+{"text":"Stop the constant pings from this shopping app.","label":"notification_help"}
+{"text":"Too many little messages appear at the top.","label":"notification_help"}
+{"text":"I only want important alerts.","label":"notification_help"}
+{"text":"This game keeps interrupting me.","label":"notification_help"}
+{"text":"Where did yesterday's family photo go?","label":"find_content"}
+{"text":"Show me the address Peter sent in a message.","label":"find_content"}
+{"text":"I cannot find the attachment from the doctor.","label":"find_content"}
+{"text":"Which folder has my downloaded ticket?","label":"find_content"}
+{"text":"Help me get back to the conversation with Jane.","label":"find_content"}
+{"text":"The green chat app has moved everything around.","label":"app_help"}
+{"text":"Which thing do I touch to reply?","label":"app_help"}
+{"text":"I am stuck on this page in the banking app.","label":"app_help"}
+{"text":"How do I go backwards from here?","label":"app_help"}
+{"text":"I cannot understand these controls.","label":"app_help"}
+{"text":"A caller says I must download remote support now.","label":"possible_scam"}
+{"text":"The tax office wants me to share my screen.","label":"possible_scam"}
+{"text":"Someone needs my security number to fix the phone.","label":"possible_scam"}
+{"text":"A warning says pay now through this strange link.","label":"possible_scam"}
+{"text":"This person wants control of my device.","label":"possible_scam"}
+{"text":"Clear out every message with no way back.","label":"destructive_action"}
+{"text":"I want to erase the whole phone.","label":"destructive_action"}
+{"text":"Permanently remove all contacts.","label":"destructive_action"}
+{"text":"Get rid of every saved picture.","label":"destructive_action"}
+{"text":"Reset this device and delete its contents.","label":"destructive_action"}
+{"text":"Why is there a blue dot near the clock?","label":"other"}
+{"text":"What can this phone do?","label":"other"}
+{"text":"I need some help but cannot describe it.","label":"other"}
+{"text":"The screen looks unfamiliar.","label":"other"}
+{"text":"Can you tell me what I am looking at?","label":"other"}

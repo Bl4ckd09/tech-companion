@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17365f">
+  <title>Tech Companion</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Tech Companion home">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>Tech Companion</span>
+    </a>
+    <div class="device-chip" id="device-chip" role="status">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span id="device-label">Checking the phone</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="guide-panel" aria-labelledby="page-title">
+      <div class="guide-copy">
+        <p class="eyebrow">Android help, one step at a time</p>
+        <h1 id="page-title">What feels difficult on your phone?</h1>
+        <p class="lede">Describe the problem in your own words. You stay in control of every step.</p>
+      </div>
+
+      <form id="help-form" class="help-form">
+        <label for="help-text">What do you want to change?</label>
+        <div class="input-row">
+          <input
+            id="help-text"
+            name="text"
+            type="text"
+            minlength="2"
+            maxlength="500"
+            placeholder="The words on my phone are too small"
+            autocomplete="off"
+            required
+          >
+          <button class="primary-button" type="submit" id="start-button">Show me how</button>
+        </div>
+        <button class="example-button" type="button" id="example-button">Use example: Make the words bigger</button>
+      </form>
+
+      <div id="message" class="message" hidden role="alert"></div>
+
+      <section id="guidance" class="guidance" hidden aria-live="polite">
+        <div class="understanding">
+          <span class="understanding-label">I understood</span>
+          <strong id="understood-as"></strong>
+        </div>
+        <div class="step-card">
+          <div class="step-number" id="step-number">1</div>
+          <div>
+            <p class="step-label">Next step</p>
+            <h2 id="instruction"></h2>
+          </div>
+        </div>
+        <div class="action-row" id="action-row">
+          <button class="primary-button" type="button" id="assistant-button">Do this for me</button>
+          <button class="secondary-button" type="button" id="refresh-button">I did it myself</button>
+        </div>
+        <p class="manual-hint" id="manual-hint">You can also tap the phone picture. Nothing happens without your choice.</p>
+      </section>
+
+      <div class="footer-actions">
+        <button class="text-button" type="button" id="reset-button">Start again</button>
+        <details class="diagnostics" id="diagnostics">
+          <summary>Developer details</summary>
+          <dl id="diagnostic-list"></dl>
+        </details>
+      </div>
+    </section>
+
+    <aside class="phone-panel" aria-label="Connected Android phone">
+      <div class="phone-heading">
+        <div>
+          <p class="eyebrow">Your phone</p>
+          <h2>Live screen</h2>
+        </div>
+        <span class="live-badge"><span aria-hidden="true"></span>Live</span>
+      </div>
+      <div class="phone-shell">
+        <div class="phone-speaker" aria-hidden="true"></div>
+        <div class="screen-wrap" id="screen-wrap">
+          <div class="screen-empty" id="screen-empty">
+            <span class="screen-symbol" aria-hidden="true">Aa</span>
+            <p>The phone screen will appear here.</p>
+          </div>
+          <img id="phone-screen" alt="Live Android phone screen" hidden>
+          <div class="tap-ring" id="tap-ring" hidden aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="phone-caption">Tap the picture when you prefer to do a step yourself.</p>
+    </aside>
+  </main>
+</body>
+</html>
