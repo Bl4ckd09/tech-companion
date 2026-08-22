@@ -139,6 +139,38 @@ class PioneerClient:
             raise PioneerError("Pioneer generation status was not an object")
         return payload
 
+    async def reserve_dataset_upload(
+        self,
+        *,
+        dataset_name: str,
+        filename: str,
+    ) -> dict[str, Any]:
+        payload = await self._request(
+            "POST",
+            "/felix/datasets/upload/url",
+            json={
+                "dataset_name": dataset_name,
+                "dataset_type": "classification",
+                "format": "jsonl",
+                "filename": filename,
+                "type": "training",
+                "generation_type": "external",
+            },
+        )
+        if not isinstance(payload, dict):
+            raise PioneerError("Pioneer upload reservation was not an object")
+        return payload
+
+    async def process_dataset_upload(self, dataset_id: str) -> dict[str, Any]:
+        payload = await self._request(
+            "POST",
+            "/felix/datasets/upload/process",
+            json={"dataset_id": dataset_id},
+        )
+        if not isinstance(payload, dict):
+            raise PioneerError("Pioneer upload processing response was not an object")
+        return payload
+
     async def dataset_details(self, dataset_name: str) -> dict[str, Any]:
         payload = await self._request("GET", f"/felix/datasets/{dataset_name}")
         if not isinstance(payload, dict):

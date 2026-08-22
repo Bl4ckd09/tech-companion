@@ -35,10 +35,21 @@ def parse_args() -> argparse.Namespace:
 
 
 def latest_version(payload: dict[str, Any]) -> dict[str, Any] | None:
-    versions = payload.get("versions")
-    if not isinstance(versions, list):
+    versions = [
+        version
+        for version in payload.get("versions", [])
+        if isinstance(version, dict)
+    ]
+    if not versions:
         return None
-    return next((version for version in versions if isinstance(version, dict)), None)
+
+    def version_number(version: dict[str, Any]) -> int:
+        try:
+            return int(version.get("version_number", -1))
+        except (TypeError, ValueError):
+            return -1
+
+    return max(versions, key=version_number)
 
 
 def print_state(state: dict[str, Any]) -> None:
@@ -68,22 +79,26 @@ async def wait_for_dataset(
     poll_seconds: float,
 ) -> bool:
     generation_job_id = state.get("generation_job_id")
-    if not isinstance(generation_job_id, str) or not generation_job_id:
-        raise RuntimeError("Run scripts/pioneer_generate.py before training")
-
-    while True:
-        generation = await client.generation_status(generation_job_id)
-        generation_status = response_status(generation)
-        state["generation_status"] = generation_status
-        save_state(state)
-        if generation_status in FAILED_STATUSES:
-            raise RuntimeError(f"Pioneer generation ended with status {generation_status}")
-        if generation_status in READY_STATUSES:
-            break
-        print_state(state)
-        if not wait:
-            return False
-        await asyncio.sleep(poll_seconds)
+    if isinstance(generation_job_id, str) and generation_job_id:
+        while True:
+            generation = await client.generation_status(generation_job_id)
+            generation_status = response_status(generation)
+            state["generation_status"] = generation_status
+            save_state(state)
+            if generation_status in FAILED_STATUSES:
+                raise RuntimeError(
+                    f"Pioneer generation ended with status {generation_status}"
+                )
+            if generation_status in READY_STATUSES:
+                break
+            print_state(state)
+            if not wait:
+                return False
+            await asyncio.sleep(poll_seconds)
+    elif not isinstance(state.get("dataset_id"), str):
+        raise RuntimeError(
+            "Run scripts/pioneer_generate.py or scripts/pioneer_upload.py before training"
+        )
 
     while True:
         dataset = await client.dataset_details(DATASET_NAME)
@@ -142,6 +157,19 @@ async def run(args: argparse.Namespace) -> None:
         )
         save_state(state)
         print_state(state)
+        while args.wait:
+            training_status = state.get("training_status")
+            if training_status in READY_STATUSES:
+                break
+            if training_status in FAILED_STATUSES:
+                raise RuntimeError(
+                    f"Pioneer training ended with status {training_status}"
+                )
+            await asyncio.sleep(args.poll_seconds)
+            training = await client.training_status(training_job_id)
+            state["training_status"] = response_status(training)
+            save_state(state)
+            print_state(state)
     finally:
         await client.close()
 
