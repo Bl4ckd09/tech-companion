@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import random
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -128,6 +129,7 @@ async def run() -> None:
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in synthetic)
     )
     training = seeds + synthetic
+    random.Random(42).shuffle(training)
     TRAINING_PATH.write_text(
         "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in training)
     )
