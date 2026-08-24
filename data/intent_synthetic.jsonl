@@ -26,21 +26,21 @@
 {"text": "The internet thingie is not working, can you help?", "label": "wifi_help"}
 {"text": "My messages are coming in, but I can't load any pictures from the web.", "label": "wifi_help"}
 {"text": "The Wi-Fi symbol has a line through it and nothing works.", "label": "wifi_help"}
-{"text": "⚠️ My wireless earbuds aren't talking to the phone anymore.", "label": "bluetooth_help"}
-{"text": "⚠️ I can't find my headphones on the phone, what do I do?", "label": "bluetooth_help"}
-{"text": "⚠️ The wireless speaker won't play music with my phone.", "label": "bluetooth_help"}
-{"text": "⚠️ The Bluetooth connection on my phone is not working with my car.", "label": "bluetooth_help"}
-{"text": "⚠️ I can't hear anything from my Bluetooth earpieces.", "label": "bluetooth_help"}
-{"text": "⚠️ My grandson's Bluetooth headphones won't connect to my phone.", "label": "bluetooth_help"}
-{"text": "⚠️ The phone won't find the Bluetooth headphones I bought for my husband.", "label": "bluetooth_help"}
-{"text": "⚠️ The wireless speaker is not working with my phone.", "label": "bluetooth_help"}
-{"text": "⚠️ I tried to connect the phone to the speaker but it's not working.", "label": "bluetooth_help"}
-{"text": "⚠️ The phone and Bluetooth headphones won't talk to each other.", "label": "bluetooth_help"}
-{"text": "⚠️ I can't find my Bluetooth headphones on the phone, what's wrong?", "label": "bluetooth_help"}
-{"text": "⚠️ The wireless earbuds won't play music through my phone.", "label": "bluetooth_help"}
-{"text": "⚠️ My Bluetooth earpieces are not working with the phone.", "label": "bluetooth_help"}
-{"text": "⚠️ The Bluetooth connection between my phone and car is not working.", "label": "bluetooth_help"}
-{"text": "Can’t here calls unless speaker on.", "label": "volume_help"}
+{"text": "My wireless earbuds aren't talking to the phone anymore.", "label": "bluetooth_help"}
+{"text": "I can't find my headphones on the phone, what do I do?", "label": "bluetooth_help"}
+{"text": "The wireless speaker won't play music with my phone.", "label": "bluetooth_help"}
+{"text": "The Bluetooth connection on my phone is not working with my car.", "label": "bluetooth_help"}
+{"text": "I can't hear anything from my Bluetooth earpieces.", "label": "bluetooth_help"}
+{"text": "My grandson's Bluetooth headphones won't connect to my phone.", "label": "bluetooth_help"}
+{"text": "The phone won't find the Bluetooth headphones I bought for my husband.", "label": "bluetooth_help"}
+{"text": "The wireless speaker is not working with my phone.", "label": "bluetooth_help"}
+{"text": "I tried to connect the phone to the speaker but it's not working.", "label": "bluetooth_help"}
+{"text": "The phone and Bluetooth headphones won't talk to each other.", "label": "bluetooth_help"}
+{"text": "I can't find my Bluetooth headphones on the phone, what's wrong?", "label": "bluetooth_help"}
+{"text": "The wireless earbuds won't play music through my phone.", "label": "bluetooth_help"}
+{"text": "My Bluetooth earpieces are not working with the phone.", "label": "bluetooth_help"}
+{"text": "The Bluetooth connection between my phone and car is not working.", "label": "bluetooth_help"}
+{"text": "Cant hear calls unless speaker on.", "label": "volume_help"}
 {"text": "Ring tone real quiet now.", "label": "volume_help"}
 {"text": "Phone silent when grandson calls?", "label": "volume_help"}
 {"text": "Call shows but no ring sound.", "label": "volume_help"}
@@ -58,44 +58,16 @@
 {"text": "I'm getting pop-ups all the time and it's driving me crazy.", "label": "notification_help"}
 {"text": "Can't turn off these annoying reminders.", "label": "notification_help"}
 {"text": "Every time I open my emails, I get a loud noise.", "label": "notification_help"}
-{"text": "My grandson added something that keeps showing ads.", "label": "notification_help"}
+{"text": "A shopping app keeps sending sale alerts.", "label": "notification_help"}
 {"text": "Why is my phone buzzing even when I'm not using it?", "label": "notification_help"}
 {"text": "I want the news updates but not the constant noise.", "label": "notification_help"}
-{"text": "There are little pictures appearing that I don't understand.", "label": "notification_help"}
+{"text": "Little notification pictures keep appearing at the top.", "label": "notification_help"}
 {"text": "The calendar is making my phone ring too much.", "label": "notification_help"}
-{"text": "Someone sent me something that won't stop showing up.", "label": "notification_help"}
-{"text": "Every time I check the weather, I get more than I asked for.", "label": "notification_help"}
+{"text": "The same alert keeps appearing after I dismiss it.", "label": "notification_help"}
+{"text": "The weather app sends too many alerts.", "label": "notification_help"}
 {"text": "I need quiet time, how do I stop the chimes?", "label": "notification_help"}
 {"text": "My wife set up some alerts that keep interrupting me.", "label": "notification_help"}
-{"text": "The pictures with words won't go away.", "label": "notification_help"}
-{"text": "Cant find the pic from my grandkids day out.", "label": "find_content"}
-{"text": "Where'd that message go with the doctor's number?", "label": "find_content"}
-{"text": "I remember seeing a pic of my new house, where is it now?", "label": "find_content"}
-{"text": "My grandpa sent a file, but I can't see it anywhere.", "label": "find_content"}
-{"text": "Lost the recipe my friend sent over. Help!", "label": "find_content"}
-{"text": "The video of my niece's recital is missing.", "label": "find_content"}
-{"text": "Can't find the pic of the cake I took at the party.", "label": "find_content"}
-{"text": "I think I saved a note with my password, but can't find it.", "label": "find_content"}
-{"text": "Where did the picture of my new garden go?", "label": "find_content"}
-{"text": "I remember downloading a book, but it's not there anymore.", "label": "find_content"}
-{"text": "The picture from my son's game is gone.", "label": "find_content"}
-{"text": "I have a document from my lawyer, but it's not showing up.", "label": "find_content"}
-{"text": "Cant find the message with the address to the reunion.", "label": "find_content"}
-{"text": "I saved a pic of my new shoes, but it's not in my gallery.", "label": "find_content"}
-{"text": "☐ My daughter's Facebook won't let me post.", "label": "app_help"}
-{"text": "☐ I pressed a button in WhatsApp and now it won't go away.", "label": "app_help"}
-{"text": "☐ How do I get back to the main screen on my email app?", "label": "app_help"}
-{"text": "☐ I'm in this green app and can't figure out how to send a message.", "label": "app_help"}
-{"text": "☐ I want to delete all my photos from Facebook, but I can't find the button.", "label": "app_help"}
-{"text": "☐ I'm in a blue app and there's a 'continue' thing I don't understand.", "label": "app_help"}
-{"text": "☐ I'm lost in my banking app and can't find where my account is.", "label": "app_help"}
-{"text": "☐ I pressed a button in my photo app and now I can't get back to my pictures.", "label": "app_help"}
-{"text": "☐ I don't know what to do on this page in my email app.", "label": "app_help"}
-{"text": "☐ This page says 'save' but I don't want to save anything.", "label": "app_help"}
-{"text": "☐ I'm trying to send a picture on WhatsApp but I don't know where to start.", "label": "app_help"}
-{"text": "☐ I'm in a blue app and can't figure out how to get back.", "label": "app_help"}
-{"text": "☐ I want to delete this app, but I don't want to lose my data.", "label": "app_help"}
-{"text": "☐ I'm in this green app and I don't know how to send a message.", "label": "app_help"}
+{"text": "Notification banners with words won't go away.", "label": "notification_help"}
 {"text": "My grandson texted asking for gift cards to fix his phone.", "label": "possible_scam"}
 {"text": "A man called saying he's from the IRS and wants payment now.", "label": "possible_scam"}
 {"text": "Someone I don't know sent a link to verify my account.", "label": "possible_scam"}
@@ -110,31 +82,31 @@
 {"text": "Someone asked me to download an app to fix my email.", "label": "possible_scam"}
 {"text": "A person on the phone said they can unlock my phone for a fee.", "label": "possible_scam"}
 {"text": "My friend's account sent a message asking for gift cards.", "label": "possible_scam"}
-{"text": "⚠️ Please erase all my photos, I want a fresh start.", "label": "destructive_action"}
-{"text": "⚠️ Can you help me get rid of all my contacts? Don't want them back.", "label": "destructive_action"}
-{"text": "⚠️ My phone is so full, please delete everything so I can start over.", "label": "destructive_action"}
-{"text": "⚠️ I need to wipe my phone clean, remove every app and picture.", "label": "destructive_action"}
-{"text": "⚠️ Can you help me clear out all the videos on my phone? I want them gone forever.", "label": "destructive_action"}
-{"text": "⚠️ Please factory reset my device, I want it like new.", "label": "destructive_action"}
-{"text": "⚠️ My phone's acting up, can you help me erase all my stuff and start over?", "label": "destructive_action"}
-{"text": "⚠️ I need to get rid of all the apps on my phone, please help me uninstall them all.", "label": "destructive_action"}
-{"text": "⚠️ Can you help me clear my phone's memory by deleting all my files?", "label": "destructive_action"}
-{"text": "⚠️ I want to start fresh on my phone, can you help me delete everything?", "label": "destructive_action"}
-{"text": "⚠️ My phone is so slow, can you help me delete all my data and start over?", "label": "destructive_action"}
-{"text": "⚠️ Please help me get rid of all the messages on my phone, I don't need them anymore.", "label": "destructive_action"}
-{"text": "⚠️ I want to remove all the music on my phone, can you help me with that?", "label": "destructive_action"}
-{"text": "⚠️ My phone is acting up, can you help me wipe it clean and start over?", "label": "destructive_action"}
+{"text": "Please erase all my photos, I want a fresh start.", "label": "destructive_action"}
+{"text": "Can you help me get rid of all my contacts? Don't want them back.", "label": "destructive_action"}
+{"text": "My phone is so full, please delete everything so I can start over.", "label": "destructive_action"}
+{"text": "I need to wipe my phone clean, remove every app and picture.", "label": "destructive_action"}
+{"text": "Can you help me clear out all the videos on my phone? I want them gone forever.", "label": "destructive_action"}
+{"text": "Please factory reset my device, I want it like new.", "label": "destructive_action"}
+{"text": "My phone's acting up, can you help me erase all my stuff and start over?", "label": "destructive_action"}
+{"text": "I need to get rid of all the apps on my phone, please help me uninstall them all.", "label": "destructive_action"}
+{"text": "Can you help me clear my phone's memory by deleting all my files?", "label": "destructive_action"}
+{"text": "I want to start fresh on my phone, can you help me delete everything?", "label": "destructive_action"}
+{"text": "My phone is so slow, can you help me delete all my data and start over?", "label": "destructive_action"}
+{"text": "Please help me get rid of all the messages on my phone, I don't need them anymore.", "label": "destructive_action"}
+{"text": "I want to remove all the music on my phone, can you help me with that?", "label": "destructive_action"}
+{"text": "My phone is acting up, can you help me wipe it clean and start over?", "label": "destructive_action"}
 {"text": "My phone's screen is all wonky.", "label": "other"}
 {"text": "Why's it takin' forever to load?", "label": "other"}
-{"text": "Grandma sent me a message but I can't read it.", "label": "other"}
-{"text": "What's this app for?", "label": "other"}
+{"text": "I need help, but I do not know what changed.", "label": "other"}
+{"text": "There is a new symbol and I do not know what it means.", "label": "other"}
 {"text": "The battery's draining way too fast.", "label": "other"}
-{"text": "It's making this weird noise.", "label": "other"}
-{"text": "I can't find the thingy to take pictures.", "label": "other"}
+{"text": "Something is different and I cannot explain it.", "label": "other"}
+{"text": "The screen is not how it was yesterday.", "label": "other"}
 {"text": "My phone's too hot.", "label": "other"}
-{"text": "This new layout's confusing me.", "label": "other"}
-{"text": "The sound's all crackly.", "label": "other"}
-{"text": "I accidentally downloaded something bad?", "label": "other"}
+{"text": "I am not sure what I need help with.", "label": "other"}
+{"text": "Can someone explain what the phone is doing?", "label": "other"}
+{"text": "This message makes no sense to me.", "label": "other"}
 {"text": "Can't seem to turn it off.", "label": "other"}
 {"text": "What's this blinking light mean?", "label": "other"}
 {"text": "The camera's all blurry.", "label": "other"}

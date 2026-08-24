@@ -10,8 +10,6 @@ class Intent(StrEnum):
     BLUETOOTH_HELP = "bluetooth_help"
     VOLUME_HELP = "volume_help"
     NOTIFICATION_HELP = "notification_help"
-    FIND_CONTENT = "find_content"
-    APP_HELP = "app_help"
     POSSIBLE_SCAM = "possible_scam"
     DESTRUCTIVE_ACTION = "destructive_action"
     OTHER = "other"
@@ -43,12 +41,6 @@ INTENT_CONFIG: dict[Intent, IntentConfig] = {
     ),
     Intent.NOTIFICATION_HELP: IntentConfig(
         Intent.NOTIFICATION_HELP, "low", "Manage unwanted notifications", None
-    ),
-    Intent.FIND_CONTENT: IntentConfig(
-        Intent.FIND_CONTENT, "low", "Find something on the phone", None
-    ),
-    Intent.APP_HELP: IntentConfig(
-        Intent.APP_HELP, "unknown", "Get help inside an app", None
     ),
     Intent.POSSIBLE_SCAM: IntentConfig(
         Intent.POSSIBLE_SCAM, "high", "Check a suspicious request", None

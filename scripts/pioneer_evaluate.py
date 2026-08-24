@@ -99,8 +99,11 @@ def load_examples() -> list[tuple[str, Intent]]:
             ) from exc
         examples.append((text, intent))
     expected_counts = Counter(intent for _, intent in examples)
-    if len(examples) != 50 or set(expected_counts) != set(Intent):
-        raise RuntimeError("Evaluation set must contain 50 rows across every intent")
+    expected_size = 5 * len(Intent)
+    if len(examples) != expected_size or set(expected_counts) != set(Intent):
+        raise RuntimeError(
+            f"Evaluation set must contain {expected_size} rows across every intent"
+        )
     if set(expected_counts.values()) != {5}:
         raise RuntimeError("Evaluation set must contain five rows for every intent")
     return examples

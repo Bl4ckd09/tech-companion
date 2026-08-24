@@ -8,9 +8,9 @@ from typing import Any
 from dotenv import load_dotenv
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-STATE_PATH = REPO_ROOT / ".state" / "pioneer_request_interpreter.json"
-DATASET_NAME = "tech-companion-parent-request-intents-v1"
-MODEL_NAME = "tech-companion-parent-request-interpreter-v1"
+STATE_PATH = REPO_ROOT / ".state" / "pioneer_request_interpreter_v2.json"
+DATASET_NAME = "tech-companion-parent-request-router-v2"
+MODEL_NAME = "tech-companion-parent-request-interpreter-v2"
 BASE_MODEL_ID = "fastino/gliner2-base-v1"
 
 

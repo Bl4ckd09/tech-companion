@@ -27,8 +27,6 @@ LABEL_DESCRIPTIONS = {
     "bluetooth_help": "A wireless accessory will not connect or play audio.",
     "volume_help": "Calls, ringing, or media sound are missing or too quiet.",
     "notification_help": "Unwanted alerts, banners, sounds, or interruptions.",
-    "find_content": "The user cannot find a saved photo, message, file, or download.",
-    "app_help": "The user is confused about navigation or controls inside an app.",
     "possible_scam": "Impersonation, remote access, gift cards, payment demands, or codes.",
     "destructive_action": "Permanent deletion, factory reset, or irreversible removal.",
     "other": "The request is too vague or does not fit another routing label.",
@@ -103,6 +101,9 @@ async def run() -> None:
             accepted: list[str] = []
             for raw_text in batch.examples:
                 text = " ".join(raw_text.strip().split())
+                for prefix in ("\u26a0\ufe0f ", "\u2610 "):
+                    text = text.removeprefix(prefix)
+                text = text.replace("\u2019", "'")
                 key = normalized(text)
                 if len(text) < 8 or key in used:
                     continue

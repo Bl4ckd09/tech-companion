@@ -6,6 +6,7 @@ import json
 import httpx
 
 from app.pioneer.client import PioneerClient
+from app.pioneer.intents import INTENT_LABELS
 from pioneer_pipeline_state import (
     DATASET_NAME,
     REPO_ROOT,
@@ -23,8 +24,11 @@ async def run() -> None:
     if not TRAINING_PATH.exists():
         raise RuntimeError("Run scripts/pioneer_synthesize.py before upload")
     rows = TRAINING_PATH.read_text().splitlines()
-    if len(rows) != 200:
-        raise RuntimeError("Training dataset must contain exactly 200 rows")
+    expected_rows = 20 * len(INTENT_LABELS)
+    if len(rows) != expected_rows:
+        raise RuntimeError(
+            f"Training dataset must contain exactly {expected_rows} rows"
+        )
     for line in rows:
         payload = json.loads(line)
         if set(payload) != {"text", "label"}:

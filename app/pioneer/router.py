@@ -62,11 +62,6 @@ class RuleBasedIntentRouter:
             Intent.NOTIFICATION_HELP,
             re.compile(r"\b(notification|pop.?ups?|alerts?|bothering)\b", re.IGNORECASE),
         ),
-        (
-            Intent.FIND_CONTENT,
-            re.compile(r"\b(find|where|photo|picture|message)\b", re.IGNORECASE),
-        ),
-        (Intent.APP_HELP, re.compile(r"\b(app|whatsapp|facebook|press|tap)\b", re.IGNORECASE)),
     )
 
     async def classify(self, text: str) -> ClassificationResult:

@@ -38,8 +38,8 @@ def load_seeds() -> list[dict[str, str]]:
         examples.append({"text": text, "label": label})
 
     labels = {example["label"] for example in examples}
-    if len(INTENT_LABELS) != 10 or labels != set(INTENT_LABELS):
-        raise RuntimeError("Seeds must cover the ten intent labels")
+    if labels != set(INTENT_LABELS):
+        raise RuntimeError("Seeds must cover every intent label")
     return examples
 
 

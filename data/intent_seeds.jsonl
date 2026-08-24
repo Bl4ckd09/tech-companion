@@ -1,60 +1,48 @@
-{"text":"Everything has gone tiny again.","label":"increase_text_size"}
-{"text":"The writing is too small for me now.","label":"increase_text_size"}
-{"text":"Can you make all these words easier to read?","label":"increase_text_size"}
-{"text":"That little internet fan has disappeared.","label":"wifi_help"}
-{"text":"Why won't this phone go online?","label":"wifi_help"}
-{"text":"The internet thing says it is not connected.","label":"wifi_help"}
-{"text":"My headphones will not talk to the phone.","label":"bluetooth_help"}
-{"text":"The wireless earpieces stopped connecting.","label":"bluetooth_help"}
-{"text":"How do I make the phone find my speaker?","label":"bluetooth_help"}
-{"text":"I cannot hear calls unless I use speakerphone.","label":"volume_help"}
-{"text":"The ringing has become very quiet.","label":"volume_help"}
-{"text":"Why is the phone silent when Sarah calls?","label":"volume_help"}
-{"text":"Facebook keeps bothering me with boxes.","label":"notification_help"}
-{"text":"These little alerts will not stop.","label":"notification_help"}
-{"text":"I do not want this app making noises all day.","label":"notification_help"}
-{"text":"Where is the picture Sarah sent yesterday?","label":"find_content"}
-{"text":"I lost the message with the train time.","label":"find_content"}
-{"text":"Can you help me find the photograph from Tom?","label":"find_content"}
-{"text":"I do not know what to press in WhatsApp.","label":"app_help"}
-{"text":"This app changed and I cannot get back.","label":"app_help"}
-{"text":"What does this button in Facebook do?","label":"app_help"}
-{"text":"A man from my bank says to install AnyDesk.","label":"possible_scam"}
-{"text":"Microsoft support wants my one-time code.","label":"possible_scam"}
-{"text":"Someone on the phone wants remote access.","label":"possible_scam"}
-{"text":"Delete every photograph on this phone.","label":"destructive_action"}
-{"text":"Wipe everything and start the phone again.","label":"destructive_action"}
-{"text":"Remove all my messages forever.","label":"destructive_action"}
-{"text":"What is this symbol at the top?","label":"other"}
-{"text":"Something looks different today.","label":"other"}
-{"text":"Can you explain what my phone is doing?","label":"other"}
-{"text":"Why did the letters get so little after that update?","label":"increase_text_size"}
-{"text":"I have to hold this right up to my face to read it.","label":"increase_text_size"}
-{"text":"The words inside my bank app are much too small.","label":"increase_text_size"}
-{"text":"The little fan shape has a cross and nothing loads.","label":"wifi_help"}
-{"text":"It works at my daughter's house but not in mine.","label":"wifi_help"}
-{"text":"My messages arrive but web pages say I am offline.","label":"wifi_help"}
-{"text":"These hearing aids used to play the phone but now they do not.","label":"bluetooth_help"}
-{"text":"The car cannot find this phone anymore.","label":"bluetooth_help"}
-{"text":"I pressed connect but the speaker still plays nothing.","label":"bluetooth_help"}
-{"text":"I can see a call coming but there is no ringing.","label":"volume_help"}
-{"text":"The voices are too faint even with the side button up.","label":"volume_help"}
-{"text":"Music is loud enough but I can barely hear callers.","label":"volume_help"}
-{"text":"WhatsApp keeps chiming through the night.","label":"notification_help"}
-{"text":"Can I keep family alerts but stop the shopping ones?","label":"notification_help"}
-{"text":"Facebook puts boxes over the screen whenever I am reading.","label":"notification_help"}
-{"text":"My boarding pass was here and now I cannot see it.","label":"find_content"}
-{"text":"Where did the document my clinic sent go?","label":"find_content"}
-{"text":"I saved a recipe yesterday but cannot remember where.","label":"find_content"}
-{"text":"I am in the blue banking app and do not know what this page means.","label":"app_help"}
-{"text":"This says continue but I am frightened to press it.","label":"app_help"}
-{"text":"I want to remove Facebook but keep all my photographs.","label":"app_help"}
-{"text":"A courier text says I owe a small fee and wants my card.","label":"possible_scam"}
-{"text":"A message says my grandson needs gift cards urgently.","label":"possible_scam"}
-{"text":"My daughter installed remote-control software to help me.","label":"possible_scam"}
-{"text":"Make space by permanently getting rid of all the videos.","label":"destructive_action"}
-{"text":"Reset it even if every saved thing disappears.","label":"destructive_action"}
-{"text":"Empty the photo bin so none of those pictures can return.","label":"destructive_action"}
-{"text":"It says something about an update. Is that good or bad?","label":"other"}
-{"text":"What am I meant to do with this screen?","label":"other"}
-{"text":"Please do not delete any of my photographs.","label":"other"}
+{"text": "Everything has gone tiny again.", "label": "increase_text_size"}
+{"text": "The writing is too small for me now.", "label": "increase_text_size"}
+{"text": "Can you make all these words easier to read?", "label": "increase_text_size"}
+{"text": "That little internet fan has disappeared.", "label": "wifi_help"}
+{"text": "Why won't this phone go online?", "label": "wifi_help"}
+{"text": "The internet thing says it is not connected.", "label": "wifi_help"}
+{"text": "My headphones will not talk to the phone.", "label": "bluetooth_help"}
+{"text": "The wireless earpieces stopped connecting.", "label": "bluetooth_help"}
+{"text": "How do I make the phone find my speaker?", "label": "bluetooth_help"}
+{"text": "I cannot hear calls unless I use speakerphone.", "label": "volume_help"}
+{"text": "The ringing has become very quiet.", "label": "volume_help"}
+{"text": "Why is the phone silent when Sarah calls?", "label": "volume_help"}
+{"text": "Facebook keeps bothering me with boxes.", "label": "notification_help"}
+{"text": "These little alerts will not stop.", "label": "notification_help"}
+{"text": "I do not want this app making noises all day.", "label": "notification_help"}
+{"text": "A man from my bank says to install AnyDesk.", "label": "possible_scam"}
+{"text": "Microsoft support wants my one-time code.", "label": "possible_scam"}
+{"text": "Someone on the phone wants remote access.", "label": "possible_scam"}
+{"text": "Delete every photograph on this phone.", "label": "destructive_action"}
+{"text": "Wipe everything and start the phone again.", "label": "destructive_action"}
+{"text": "Remove all my messages forever.", "label": "destructive_action"}
+{"text": "What is this symbol at the top?", "label": "other"}
+{"text": "Something looks different today.", "label": "other"}
+{"text": "Can you explain what my phone is doing?", "label": "other"}
+{"text": "Why did the letters get so little after that update?", "label": "increase_text_size"}
+{"text": "I have to hold this right up to my face to read it.", "label": "increase_text_size"}
+{"text": "The words inside my bank app are much too small.", "label": "increase_text_size"}
+{"text": "The little fan shape has a cross and nothing loads.", "label": "wifi_help"}
+{"text": "It works at my daughter's house but not in mine.", "label": "wifi_help"}
+{"text": "My messages arrive but web pages say I am offline.", "label": "wifi_help"}
+{"text": "These hearing aids used to play the phone but now they do not.", "label": "bluetooth_help"}
+{"text": "The car cannot find this phone anymore.", "label": "bluetooth_help"}
+{"text": "I pressed connect but the speaker still plays nothing.", "label": "bluetooth_help"}
+{"text": "I can see a call coming but there is no ringing.", "label": "volume_help"}
+{"text": "The voices are too faint even with the side button up.", "label": "volume_help"}
+{"text": "Music is loud enough but I can barely hear callers.", "label": "volume_help"}
+{"text": "WhatsApp keeps chiming through the night.", "label": "notification_help"}
+{"text": "Can I keep family alerts but stop the shopping ones?", "label": "notification_help"}
+{"text": "Facebook puts boxes over the screen whenever I am reading.", "label": "notification_help"}
+{"text": "A courier text says I owe a small fee and wants my card.", "label": "possible_scam"}
+{"text": "A message says my grandson needs gift cards urgently.", "label": "possible_scam"}
+{"text": "My daughter installed remote-control software to help me.", "label": "possible_scam"}
+{"text": "Make space by permanently getting rid of all the videos.", "label": "destructive_action"}
+{"text": "Reset it even if every saved thing disappears.", "label": "destructive_action"}
+{"text": "Empty the photo bin so none of those pictures can return.", "label": "destructive_action"}
+{"text": "It says something about an update. Is that good or bad?", "label": "other"}
+{"text": "What am I meant to do with this screen?", "label": "other"}
+{"text": "Please do not delete any of my photographs.", "label": "other"}
