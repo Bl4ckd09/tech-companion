@@ -76,6 +76,7 @@ class TavilySearchClient:
             raise TavilyError("Tavily returned an unexpected response")
 
         sources: list[SearchSource] = []
+        seen_urls: set[str] = set()
         for item in payload.get("results", []):
             if not isinstance(item, dict):
                 continue
@@ -83,6 +84,10 @@ class TavilySearchClient:
             url = item.get("url")
             content = item.get("content")
             if all(isinstance(value, str) and value for value in (title, url, content)):
+                canonical_url = url.split("?", 1)[0]
+                if canonical_url in seen_urls:
+                    continue
+                seen_urls.add(canonical_url)
                 sources.append(SearchSource(title, url, content))
         answer: Any = payload.get("answer")
         if not isinstance(answer, str) or not answer.strip():
