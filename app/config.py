@@ -20,6 +20,7 @@ def _as_bool(value: str | None, default: bool = False) -> bool:
 class Settings:
     hai_api_key: str | None
     pioneer_api_key: str | None
+    tavily_api_key: str | None
     pioneer_model_id: str
     android_serial: str | None
     adb_path: str
@@ -36,6 +37,7 @@ class Settings:
         return cls(
             hai_api_key=os.getenv("HAI_API_KEY") or None,
             pioneer_api_key=os.getenv("PIONEER_API_KEY") or None,
+            tavily_api_key=os.getenv("TAVILY_API_KEY") or None,
             pioneer_model_id=os.getenv(
                 "PIONEER_MODEL_ID", "fastino/gliner2-base-v1"
             ),

@@ -19,6 +19,7 @@ from app.holo.localizer import HoloLocalizer
 from app.orchestrator import TechCompanion
 from app.pioneer.client import PioneerClient, PioneerError
 from app.pioneer.router import PioneerIntentRouter, RuleBasedIntentRouter
+from app.tavily.client import TavilyError, TavilySearchClient
 from app.schemas import (
     DeviceStatus,
     ExecuteActionRequest,
@@ -98,6 +99,11 @@ def build_services(settings: Settings) -> Services:
         return HoloSession(holo_api, goal)
 
     localizer = HoloLocalizer(holo_api) if holo_api is not None else None
+    public_search = (
+        TavilySearchClient(settings.tavily_api_key)
+        if settings.tavily_api_key
+        else None
+    )
     companion = TechCompanion(
         device=device,
         intent_router=router,
@@ -106,6 +112,7 @@ def build_services(settings: Settings) -> Services:
         android_provider_name="adb",
         fallback=DeterministicHoloFallback(localizer) if localizer else None,
         screen_observer=HoloObserver(holo_api) if holo_api else None,
+        public_search=public_search,
     )
     return Services(
         companion=companion,
@@ -147,7 +154,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     ) -> SessionResponse:
         try:
             return await companion(request).start(payload.text)
-        except (PioneerError, HoloError) as exc:
+        except (PioneerError, HoloError, TavilyError) as exc:
             raise HTTPException(status_code=503, detail=str(exc)) from exc
 
     @app.post("/api/session/{session_id}/refresh", response_model=SessionResponse)

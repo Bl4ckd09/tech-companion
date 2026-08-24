@@ -12,6 +12,7 @@ from app.holo.fallback import DeterministicHoloFallback
 from app.pioneer.client import ClassificationResult
 from app.pioneer.intents import INTENT_CONFIG, Intent, IntentConfig
 from app.pioneer.router import IntentRouter
+from app.tavily.client import SearchAnswer, is_explicit_public_lookup
 from app.schemas import (
     Action,
     ClickAction,
@@ -40,6 +41,9 @@ class ScreenObserver(Protocol):
         user_request: str,
     ) -> ScreenObservation: ...
 
+class PublicSearch(Protocol):
+    async def search(self, query: str) -> SearchAnswer: ...
+
 
 @dataclass(slots=True)
 class CompanionSession:
@@ -57,6 +61,8 @@ class CompanionSession:
     visual_latency_ms: int | None = None
     screen_observation: ScreenObservation | None = None
     observation_latency_ms: int | None = None
+    search_latency_ms: int | None = None
+    search_sources: tuple[str, ...] = ()
     started_at: float = field(default_factory=time.time)
 
 
@@ -71,6 +77,7 @@ class TechCompanion:
         android_provider_name: str,
         fallback: DeterministicHoloFallback | None = None,
         screen_observer: ScreenObserver | None = None,
+        public_search: PublicSearch | None = None,
     ) -> None:
         self.device = device
         self.intent_router = intent_router
@@ -79,6 +86,7 @@ class TechCompanion:
         self.android_provider_name = android_provider_name
         self.fallback = fallback
         self.screen_observer = screen_observer
+        self.public_search = public_search
         self.sessions: dict[str, CompanionSession] = {}
         self.lock = asyncio.Lock()
 
@@ -94,6 +102,21 @@ class TechCompanion:
         self.sessions[session.session_id] = session
 
         if self._apply_risk_gate(session):
+            return self._response(session)
+        if self.public_search is not None and is_explicit_public_lookup(user_text):
+            search_answer = await self.public_search.search(user_text)
+            session.status = "complete"
+            session.search_latency_ms = search_answer.latency_ms
+            session.search_sources = tuple(
+                source.url for source in search_answer.sources
+            )
+            source_lines = "\n".join(
+                f"- {source.title}: {source.url}"
+                for source in search_answer.sources
+            )
+            session.instruction = search_answer.answer
+            if source_lines:
+                session.instruction += f"\n\nSources:\n{source_lines}"
             return self._response(session)
 
         device_status = None
@@ -284,6 +307,9 @@ class TechCompanion:
             diagnostics["observation_latency_ms"] = session.observation_latency_ms
             diagnostics["screen_title"] = session.screen_observation.screen_title
             diagnostics["screen_app"] = session.screen_observation.current_app
+        if session.search_latency_ms is not None:
+            diagnostics["search_latency_ms"] = session.search_latency_ms
+            diagnostics["search_sources"] = list(session.search_sources)
         return SessionResponse(
             session_id=session.session_id,
             status=session.status,

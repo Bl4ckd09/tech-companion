@@ -6,6 +6,7 @@ from app.holo.demo import DemoHoloSession
 from app.orchestrator import TechCompanion
 from app.pioneer.client import ClassificationResult
 from app.pioneer.intents import Intent
+from app.tavily.client import SearchAnswer, SearchSource
 
 
 def classification(intent: Intent, score: float = 0.9) -> ClassificationResult:
@@ -55,8 +56,27 @@ class FakeObserver:
             sensitive_screen=False,
         )
 
+class FakePublicSearch:
+    async def search(self, query: str) -> SearchAnswer:
+        del query
+        return SearchAnswer(
+            answer="Android provides font-size controls in Settings.",
+            sources=(
+                SearchSource(
+                    title="Change text size",
+                    url="https://support.google.com/android/example",
+                    content="Open Settings and choose Font size.",
+                ),
+            ),
+            latency_ms=33,
+        )
 
-def companion(router: object, observer: FakeObserver) -> TechCompanion:
+
+def companion(
+    router: object,
+    observer: FakeObserver,
+    public_search: object | None = None,
+) -> TechCompanion:
     return TechCompanion(
         device=DemoAndroidDevice(),
         intent_router=router,
@@ -64,6 +84,7 @@ def companion(router: object, observer: FakeObserver) -> TechCompanion:
         visual_provider_name="demo-holo",
         android_provider_name="demo-emulator",
         screen_observer=observer,
+        public_search=public_search,
     )
 
 
@@ -91,3 +112,18 @@ async def test_risk_gate_runs_before_screen_observation() -> None:
     assert response.status == "blocked"
     assert observer.calls == 0
     assert response.screenshot_url is None
+
+async def test_explicit_public_lookup_uses_search_without_a_screenshot() -> None:
+    observer = FakeObserver()
+
+    response = await companion(
+        ContextualRouter(),
+        observer,
+        FakePublicSearch(),
+    ).start("Find official Android font-size instructions")
+
+    assert response.status == "complete"
+    assert observer.calls == 0
+    assert response.screenshot_url is None
+    assert "support.google.com" in response.instruction
+    assert response.diagnostics["search_latency_ms"] == 33
