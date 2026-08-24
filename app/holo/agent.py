@@ -53,6 +53,55 @@ class HoloStep(BaseModel):
             )
         return DoneAction(summary=tool.summary)
 
+class ScreenObservation(BaseModel):
+    screen_title: str
+    current_app: str
+    summary: str
+    visible_controls: list[str] = Field(max_length=20)
+    sensitive_screen: bool
+
+
+class HoloObserver:
+    def __init__(self, api: HoloApiClient) -> None:
+        self.api = api
+        self.last_latency_ms: int | None = None
+
+    async def observe(
+        self,
+        image_bytes: bytes,
+        user_request: str,
+    ) -> ScreenObservation:
+        schema = ScreenObservation.model_json_schema()
+        data_uri = "data:image/png;base64," + base64.b64encode(image_bytes).decode()
+        response = await self.api.structured_completion(
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "Observe the current phone screen without proposing or executing "
+                        "an action. Describe facts that help interpret the user's request. "
+                        "Mark screens containing messages, account details, payment, "
+                        "authentication, or personal records as sensitive."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url", "image_url": {"url": data_uri}},
+                        {
+                            "type": "text",
+                            "text": f"User request: {user_request}",
+                        },
+                    ],
+                },
+            ],
+            schema=schema,
+            temperature=0.0,
+            enable_thinking=False,
+        )
+        self.last_latency_ms = response.latency_ms
+        return ScreenObservation.model_validate_json(response.content)
+
 
 @dataclass(slots=True)
 class HoloSession:

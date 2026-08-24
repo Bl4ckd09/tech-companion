@@ -7,9 +7,10 @@ from dataclasses import dataclass, field
 from typing import Callable, Protocol
 
 from app.android.device import AndroidDevice
+from app.holo.agent import ScreenObservation
 from app.holo.fallback import DeterministicHoloFallback
 from app.pioneer.client import ClassificationResult
-from app.pioneer.intents import INTENT_CONFIG, IntentConfig
+from app.pioneer.intents import INTENT_CONFIG, Intent, IntentConfig
 from app.pioneer.router import IntentRouter
 from app.schemas import (
     Action,
@@ -30,6 +31,15 @@ class VisualSession(Protocol):
     async def next_step(self, image_bytes: bytes): ...
     def record_result(self, action: Action, result: str) -> None: ...
 
+class ScreenObserver(Protocol):
+    last_latency_ms: int | None
+
+    async def observe(
+        self,
+        image_bytes: bytes,
+        user_request: str,
+    ) -> ScreenObservation: ...
+
 
 @dataclass(slots=True)
 class CompanionSession:
@@ -45,6 +55,8 @@ class CompanionSession:
     fallback_used: bool = False
     fallback_index: int = 0
     visual_latency_ms: int | None = None
+    screen_observation: ScreenObservation | None = None
+    observation_latency_ms: int | None = None
     started_at: float = field(default_factory=time.time)
 
 
@@ -58,6 +70,7 @@ class TechCompanion:
         visual_provider_name: str,
         android_provider_name: str,
         fallback: DeterministicHoloFallback | None = None,
+        screen_observer: ScreenObserver | None = None,
     ) -> None:
         self.device = device
         self.intent_router = intent_router
@@ -65,6 +78,7 @@ class TechCompanion:
         self.visual_provider_name = visual_provider_name
         self.android_provider_name = android_provider_name
         self.fallback = fallback
+        self.screen_observer = screen_observer
         self.sessions: dict[str, CompanionSession] = {}
         self.lock = asyncio.Lock()
 
@@ -79,31 +93,67 @@ class TechCompanion:
         )
         self.sessions[session.session_id] = session
 
-        if config.risk == "high":
-            session.status = "blocked"
-            session.instruction = (
-                "Do not continue. A legitimate bank or support service should not "
-                "request remote control of your phone."
-            )
-            return self._response(session)
-        if config.risk == "confirm":
-            session.status = "blocked"
-            session.instruction = (
-                "This action can permanently remove data. Ask a trusted person to "
-                "review it before continuing."
-            )
-            return self._response(session)
-        if config.goal is None:
-            session.status = "unsupported"
-            session.instruction = (
-                "This prototype currently supports making Android text larger."
-            )
+        if self._apply_risk_gate(session):
             return self._response(session)
 
-        status = await asyncio.to_thread(self.device.status)
-        if not status.connected:
+        device_status = None
+        if (
+            classification.intent is Intent.OTHER
+            and self.screen_observer is not None
+        ):
+            device_status = await asyncio.to_thread(self.device.status)
+            if not device_status.connected:
+                session.status = "error"
+                session.instruction = device_status.detail
+                return self._response(session)
+            screenshot = await asyncio.to_thread(self.device.screenshot)
+            observation = await self.screen_observer.observe(
+                screenshot,
+                user_text,
+            )
+            session.screen_observation = observation
+            session.observation_latency_ms = self.screen_observer.last_latency_ms
+            if observation.sensitive_screen:
+                session.status = "blocked"
+                session.instruction = (
+                    "This screen may contain personal information. Describe the problem "
+                    "without sharing account, payment, or authentication details."
+                )
+                return self._response(session)
+            visible_controls = ", ".join(observation.visible_controls)
+            contextual_request = (
+                f"{user_text}\n"
+                f"Current app: {observation.current_app}\n"
+                f"Screen title: {observation.screen_title}\n"
+                f"Screen summary: {observation.summary}\n"
+                f"Visible controls: {visible_controls}"
+            )
+            refined = await self.intent_router.classify(contextual_request)
+            if refined.intent is not Intent.OTHER:
+                session.classification = refined
+                session.config = INTENT_CONFIG[refined.intent]
+                config = session.config
+                if self._apply_risk_gate(session):
+                    return self._response(session)
+
+        if config.goal is None:
+            session.status = "unsupported"
+            if session.screen_observation is None:
+                session.instruction = (
+                    "This prototype currently supports making Android text larger."
+                )
+            else:
+                session.instruction = (
+                    f"I can see {session.screen_observation.screen_title}, but I need "
+                    "a more specific request before suggesting an action."
+                )
+            return self._response(session)
+
+        if device_status is None:
+            device_status = await asyncio.to_thread(self.device.status)
+        if not device_status.connected:
             session.status = "error"
-            session.instruction = status.detail
+            session.instruction = device_status.detail
             return self._response(session)
 
         await asyncio.to_thread(self.device.launch_settings)
@@ -167,6 +217,23 @@ class TechCompanion:
             raise KeyError("This session has no screenshot")
         return session.screenshot
 
+    def _apply_risk_gate(self, session: CompanionSession) -> bool:
+        if session.config.risk == "high":
+            session.status = "blocked"
+            session.instruction = (
+                "Do not continue. A legitimate bank or support service should not "
+                "request remote control of your phone."
+            )
+            return True
+        if session.config.risk == "confirm":
+            session.status = "blocked"
+            session.instruction = (
+                "This action can permanently remove data. Ask a trusted person to "
+                "review it before continuing."
+            )
+            return True
+        return False
+
     async def _plan_next(self, session: CompanionSession) -> None:
         if session.visual is None or session.screenshot is None:
             raise RuntimeError("The visual session is not ready")
@@ -213,6 +280,10 @@ class TechCompanion:
         }
         if session.visual and session.visual.last_reasoning:
             diagnostics["visual_reasoning"] = session.visual.last_reasoning
+        if session.screen_observation is not None:
+            diagnostics["observation_latency_ms"] = session.observation_latency_ms
+            diagnostics["screen_title"] = session.screen_observation.screen_title
+            diagnostics["screen_app"] = session.screen_observation.current_app
         return SessionResponse(
             session_id=session.session_id,
             status=session.status,

@@ -11,7 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from app.android.adb import AdbClient
 from app.android.device import AdbAndroidDevice, DemoAndroidDevice
 from app.config import Settings
-from app.holo.agent import HoloSession
+from app.holo.agent import HoloObserver, HoloSession
 from app.holo.client import HoloApiClient, HoloError
 from app.holo.demo import DemoHoloSession
 from app.holo.fallback import DeterministicHoloFallback
@@ -105,6 +105,7 @@ def build_services(settings: Settings) -> Services:
         visual_provider_name=settings.holo_model,
         android_provider_name="adb",
         fallback=DeterministicHoloFallback(localizer) if localizer else None,
+        screen_observer=HoloObserver(holo_api) if holo_api else None,
     )
     return Services(
         companion=companion,

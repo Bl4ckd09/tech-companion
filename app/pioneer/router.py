@@ -18,14 +18,27 @@ class PioneerIntentRouter:
         model_id: str,
         *,
         fallback: IntentRouter | None = None,
+        min_score: float = 0.5,
     ) -> None:
+        if not 0 <= min_score <= 1:
+            raise ValueError("min_score must be between zero and one")
         self.client = client
         self.model_id = model_id
         self.fallback = fallback
+        self.min_score = min_score
 
     async def classify(self, text: str) -> ClassificationResult:
         try:
-            return await self.client.classify(self.model_id, text)
+            result = await self.client.classify(self.model_id, text)
+            if result.score is not None and result.score < self.min_score:
+                return ClassificationResult(
+                    intent=Intent.OTHER,
+                    score=result.score,
+                    model_id=result.model_id,
+                    latency_ms=result.latency_ms,
+                    source="pioneer-abstained",
+                )
+            return result
         except PioneerError:
             if self.fallback is None:
                 raise

@@ -149,9 +149,19 @@ def calculate_metrics(
     risk_labels = {intent.value for intent in RISK_INTENTS}
     risk_rows = [row for row in rows if row["expected"] in risk_labels]
     non_risk_rows = [row for row in rows if row["expected"] not in risk_labels]
+    supported_label = Intent.INCREASE_TEXT_SIZE.value
+    supported_rows = [
+        row for row in rows if row["expected"] == supported_label
+    ]
+    holo_invocation_rows = [
+        row for row in rows if row["predicted"] == supported_label
+    ]
     latencies = sorted(int(row["latency_ms"]) for row in rows)
     p95_index = max(0, math.ceil(len(latencies) * 0.95) - 1)
     errors = [row for row in rows if row["expected"] != row["predicted"]]
+    visual_holo_calls = len(holo_invocation_rows)
+    interpreter_holo_calls = total if provider == "holo" else 0
+    total_holo_calls = visual_holo_calls + interpreter_holo_calls
     return {
         "provider": provider,
         "model_id": model_id,
@@ -179,6 +189,22 @@ def calculate_metrics(
                 len(non_risk_rows),
             ),
             4,
+        ),
+        "supported_route_recall": round(
+            ratio(
+                sum(row["predicted"] == supported_label for row in supported_rows),
+                len(supported_rows),
+            ),
+            4,
+        ),
+        "interpreter_holo_calls": interpreter_holo_calls,
+        "visual_holo_calls": visual_holo_calls,
+        "total_holo_calls": total_holo_calls,
+        "total_holo_call_rate": round(ratio(total_holo_calls, total), 4),
+        "unsafe_visual_holo_invocations": sum(
+            row["expected"] in risk_labels
+            and row["predicted"] == supported_label
+            for row in rows
         ),
         "latency_ms": {
             "mean": round(mean(latencies)),

@@ -205,6 +205,14 @@ class PioneerClient:
             raise PioneerError("Pioneer training status was not an object")
         return payload
 
+    async def model_download(self, job_id: str) -> dict[str, Any]:
+        payload = await self._request(
+            "GET", f"/felix/training-jobs/{job_id}/download"
+        )
+        if not isinstance(payload, dict):
+            raise PioneerError("Pioneer model download response was not an object")
+        return payload
+
     async def start_evaluation(
         self, *, model_id: str, dataset_name: str
     ) -> dict[str, Any]:
