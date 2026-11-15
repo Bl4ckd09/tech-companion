@@ -23,7 +23,3 @@ Open `http://127.0.0.1:8000/` to use the demo. For a real Android device, config
 ```sh
 uv run pytest -q
 ```
-
-## Known issue
-
-`pyproject.toml` declares a `droid` console script (`app.android.cli:main`), but that module is not in this tree yet, so `uv run droid` will fail until the CLI lands.
